@@ -59,7 +59,7 @@ const getMoreInfo = (id) => {
   console.log(id);
     fetch(`phone/${id}`).then(phoneData => {
         console.log(phoneData);
-        phoneData.json().then(console.log(id))
+        phoneData.json().then(console.log(phoneData))
     }).catch((err)=>console.log(err))
   
 };
