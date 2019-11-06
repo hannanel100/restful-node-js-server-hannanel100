@@ -28,6 +28,7 @@ app.get('/phone/:id', (req, res) => {
             console.log(e)
             return res.status(500).send();
         } else {
+            console.log(data);
             return res.send(data);
         }
     })
