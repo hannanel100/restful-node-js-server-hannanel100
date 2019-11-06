@@ -6,13 +6,14 @@ function readOne(id, callback) {
         console.log(d);
         const phone = d && d.length > 0 ? JSON.parse(d.toString()) : [];
         console.log(phone);
+        if (e){
+            callback(e);
+        }
+        else{
+            callback(e, phone);
+        }
     })
-    if (e){
-        callback(e);
-    }
-    else{
-        callback(e, phone);
-    }
+    
 }
 
 
