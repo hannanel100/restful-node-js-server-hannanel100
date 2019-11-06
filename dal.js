@@ -10,7 +10,7 @@ function readOne(id, callback) {
             callback(e);
         }
         else{
-            callback(e, phone);
+            callback(null, phone);
         }
     })
     
