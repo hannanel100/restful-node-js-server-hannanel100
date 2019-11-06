@@ -7,7 +7,7 @@ function getPhone(id, callback) {
         if (e) {
             callback(e);
         } else {
-            callback(null, allPhones);
+            callback(null, phoneData);
         }
     })
     
