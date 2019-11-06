@@ -28,7 +28,7 @@ fetch(phoneEndpoint)
     console.log(err);
   });
 
-function phoneTableView(phones) {
+const phoneTableView = (phones) =>  {
   let html = "";
   for (let i = 0; i < phones.length; i++) {
     html += `<tr id=${phones[i].id} class="phone">
@@ -36,10 +36,11 @@ function phoneTableView(phones) {
             <td>${phones[i].id}</td>
             <td>${phones[i].name}</td>
             <td>${phones[i].carrier}</td>
-            <td><img src=${phones[i].imageUrl} alt=${phones[i].imageUrl}></td>
+            <td><img src=${img/phones/phones[i].imageUrl} alt=${phones[i].imageUrl}></td>
             <td>${phones[i].id}</td>
         </tr>`;
   }
+  
   document.getElementById("phones").innerHTML = html;
   const phoneList = document.getElementsByClassName("phone");
   
@@ -59,6 +60,6 @@ const getMoreInfo = (id) => {
     fetch(`phone/${id}`).then(phoneData => {
         console.log(phoneData);
         phoneData.json().then(console.log(id))
-    })
+    }).catch((err)=>console.log(err))
   
 };
