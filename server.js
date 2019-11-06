@@ -60,6 +60,6 @@ app.get('/phone/:id', (req, res) => {
 //     // })
 // });
 
-app.listen(PORT, () =>
+app.listen(process.env.PORT, () =>
     console.log(`Example app listening on port ${PORT}!`),
 );
