@@ -36,7 +36,7 @@ const phoneTableView = (phones) =>  {
             <td>${phones[i].id}</td>
             <td>${phones[i].name}</td>
             <td>${phones[i].carrier}</td>
-            <td><img src=${img/phones/phones[i].imageUrl} alt=${phones[i].imageUrl}></td>
+            <td><img src=img/phones/${phones[i].imageUrl} alt=${phones[i].imageUrl}></td>
             <td>${phones[i].id}</td>
         </tr>`;
   }
