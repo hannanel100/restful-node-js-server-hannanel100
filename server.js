@@ -22,8 +22,8 @@ app.get('/phone', (req, res) => {
 
 
 app.get('/phone/:id', (req, res) => {
-    console.log(req.param.id)
-    phoneBl.getPhone(req.param.id, function (e, data) {
+    console.log(req.params.id)
+    phoneBl.getPhone(req.params.id, function (e, data) {
         if (e) {
             console.log(e)
             return res.status(500).send();
