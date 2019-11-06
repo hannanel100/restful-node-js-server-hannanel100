@@ -16,9 +16,6 @@ function readOne(id, callback) {
 }
 
 
-
-git config user.name "hananel100"
-
 function readAll(callback) {
     fs.readFile(fileName, (e, d) => {
         
