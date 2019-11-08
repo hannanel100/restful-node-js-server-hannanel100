@@ -34,15 +34,15 @@ app.get('/phone/:id', (req, res) => {
     })
 });
 
-// app.post('/runner', (req, res) => {
-//     // runnerBl.createRunner(req.body, function (e, data) {
-//     //     if (e) {
-//     //         return res.status(500).send();
-//     //     } else {
-//     //         return res.send(data);
-//     //     }
-//     // })
-// });
+app.post('/phone', (req, res) => {
+    phoneBl.createPhone(req.body, function (e, data) {
+        if (e) {
+            return res.status(500).send();
+        } else {
+            return res.send(data);
+        }
+    })
+});
 // app.put('/runner/:id', (req, res) => {
 //     // runnerBl.updateRunner(req.body, function (e, data) {
 //     //     if (e) {

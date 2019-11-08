@@ -1,34 +1,37 @@
 const phoneEndpoint = "/phone";
-// document.getElementById('add').addEventListener('click', function (e) {
-//     e.preventDefault();
-//     const phone = {
-//         id: this.form.id.value,
-//         name: this.form.name.value,
-//         km: this.form.km.value
-//     };
+// add phone
+document.getElementById('add').addEventListener('click', function (e) {
+    e.preventDefault();
+    const phone = {
+      age: this.form.age.value,
+        id: this.form.id.value,
+        name: this.form.name.value,
+        carrier: this.form.carrier.value,
+        imageUrl: this.form.imageUrl.value,
+        phoneDescription: this.form.phone-description.value
+    };
 
-//     fetch(phoneEndpoint, {
-//         method: "POST",
-//         headers: { 'Content-Type': 'application/json' }, // this line is important, if this content-type is not set it wont work
-//         body: JSON.stringify(phone)
-//     }).then(responseData => {
-//         console.log(responseData);
+    fetch(phoneEndpoint, {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' }, // this line is important, if this content-type is not set it wont work
+        body: JSON.stringify(phone)
+    }).then(responseData => {
+        console.log(responseData);
 
-//     }).catch(err => {
-//         alert('not inserted')
-//     });
-// })
-
+    }).catch(err => {
+        alert('not inserted')
+    });
+})
+//all phones
 fetch(phoneEndpoint)
   .then(phoneData => {
-    console.log(phoneData);
     phoneData.json().then(phoneTableView);
   })
   .catch(err => {
     console.log(err);
   });
 
-const phoneTableView = (phones) =>  {
+const phoneTableView = (phones) => {
   let html = "";
   for (let i = 0; i < phones.length; i++) {
     html += `<tr id=${phones[i].id} class="phone">
@@ -38,28 +41,34 @@ const phoneTableView = (phones) =>  {
             <td>${phones[i].carrier}</td>
             <td><img src=${phones[i].imageUrl} alt=${phones[i].imageUrl}></td>
             <td>${phones[i].id}</td>
+            <td><button>Edit</button></td>
+            <td><button>Delete</button></td>
         </tr>`;
   }
-  
+
   document.getElementById("phones").innerHTML = html;
   const phoneList = document.getElementsByClassName("phone");
-  
+
   const phonesArray = [...phoneList];
-  console.log(phonesArray)
-  phonesArray.forEach(phone => phone.addEventListener("click", function(e) {
-      getMoreInfo(e.target.parentNode.id);
-      
-    }
+  phonesArray.forEach(phone => phone.addEventListener("click", function (e) {
+    getMoreInfo(e.target.parentNode.id);
+
+  }
   ))
 }
 
 
 
 const getMoreInfo = (id) => {
-  console.log(id);
-    fetch(`phone/${id}`).then(phoneData => {
-        console.log(phoneData);
-        phoneData.json().then(console.log(phoneData))
-    }).catch((err)=>console.log(err))
+  fetch(`phone/${id}`)
+    .then(response => response.json())
+    .then((phoneData) => displayMoreInfo(phoneData))
+    .catch((err) => console.log(err))
+
+}
+
+const displayMoreInfo = (phoneData) => {
+  document.getElementById(phoneData.id).after(phoneData.additionalFeatures)
+
   
-};
+}

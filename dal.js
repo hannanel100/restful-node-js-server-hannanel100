@@ -19,7 +19,6 @@ function readOne(id, callback) {
 
 function readAll(callback) {
     fs.readFile(fileName, (e, d) => {
-        
         const allPhones = d && d.length > 0 ? JSON.parse(d.toString()) : [];
         allPhones.sort(function (a, b) {
             return a.id - b.id;
