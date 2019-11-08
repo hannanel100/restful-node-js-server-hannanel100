@@ -1,28 +1,28 @@
 const phoneEndpoint = "/phone";
-// add phone
+// add phone - post not working
 document.getElementById('add').addEventListener('click', function (e) {
-    e.preventDefault();
-    const phone = {
-      age: this.form.age.value,
-        id: this.form.id.value,
-        name: this.form.name.value,
-        carrier: this.form.carrier.value,
-        imageUrl: this.form.imageUrl.value,
-        phoneDescription: this.form.phone-description.value
-    };
+  e.preventDefault();
+  const phone = {
+    age: this.form.age.value,
+    id: this.form.id.value,
+    name: this.form.name.value,
+    carrier: this.form.carrier.value,
+    imageUrl: this.form.imageUrl.value,
+    phoneDescription: this.form.phone - description.value
+  };
 
-    fetch(phoneEndpoint, {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' }, // this line is important, if this content-type is not set it wont work
-        body: JSON.stringify(phone)
-    }).then(responseData => {
-        console.log(responseData);
+  fetch(phoneEndpoint, {
+    method: "POST",
+    headers: { 'Content-Type': 'application/json' }, // this line is important, if this content-type is not set it wont work
+    body: JSON.stringify(phone)
+  }).then(responseData => {
+    console.log(responseData);
 
-    }).catch(err => {
-        alert('not inserted')
-    });
+  }).catch(err => {
+    alert('not inserted')
+  });
 })
-//all phones
+// get all phones - works
 fetch(phoneEndpoint)
   .then(phoneData => {
     phoneData.json().then(phoneTableView);
@@ -30,7 +30,7 @@ fetch(phoneEndpoint)
   .catch(err => {
     console.log(err);
   });
-
+// creates phone table view
 const phoneTableView = (phones) => {
   let html = "";
   for (let i = 0; i < phones.length; i++) {
@@ -58,7 +58,7 @@ const phoneTableView = (phones) => {
 }
 
 
-
+// get one phone
 const getMoreInfo = (id) => {
   fetch(`phone/${id}`)
     .then(response => response.json())
@@ -66,9 +66,9 @@ const getMoreInfo = (id) => {
     .catch((err) => console.log(err))
 
 }
-
+// display data recieved from getMoreInfo
 const displayMoreInfo = (phoneData) => {
   document.getElementById(phoneData.id).after(phoneData.additionalFeatures)
 
-  
+
 }
