@@ -62,8 +62,9 @@ const getMoreInfo = id => {
     .catch(err => console.log(err));
 };
 // display data recieved from getMoreInfo
-const displayMoreInfo = phoneData => {
-  document.getElementById(phoneData.id).after(phoneData.additionalFeatures);
+const displayMoreInfo = (phoneData) => {
+  // document.getElementById(phoneData.id).after(phoneData.additionalFeatures);
+  console.log("add more")
 };
 
 const delButtonList = document.getElementsByClassName("delButton");
