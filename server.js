@@ -52,15 +52,15 @@ app.post('/phone', (req, res) => {
 //     //     }
 //     // })
 // });
-// app.delete('/runner/:id', (req, res) => {
-//     // runnerBl.deleteRunner(req.params.id, function (e, data) {
-//     //     if (e) {
-//     //         return res.status(500).send();
-//     //     } else {
-//     //         return res.send(data);
-//     //     }
-//     // })
-// });
+app.delete('/phone/:id', (req, res) => {
+    phoneBl.deletePhone(req.params.id, function (e, data) {
+        if (e) {
+            return res.status(500).send();
+        } else {
+            return res.send(data);
+        }
+    })
+});
 
 app.listen(process.env.PORT || PORT, () =>
     console.log(`Example app listening on port ${process.env.PORT || PORT}!`),

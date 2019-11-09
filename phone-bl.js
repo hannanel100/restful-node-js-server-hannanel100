@@ -37,7 +37,7 @@ function createPhone(addedPhone, callback) {
     }
 }
 
-function updatePhone(runner) {
+function updatePhone(phone) {
 
 }
 

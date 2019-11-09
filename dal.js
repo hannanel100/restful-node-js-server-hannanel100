@@ -51,13 +51,13 @@ function updateOne(runnerToUpdate, callback) {
 
 }
 
-function deleteOne(runnerToDelete, callback) {
+function deleteOne(phoneToDelete, callback) {
     fs.readFile(fileName, (e, d) => {
-        let allRunners = d && d.length > 0 ? JSON.parse(d.toString()) : [];
+        let allPhones = d && d.length > 0 ? JSON.parse(d.toString()) : [];
 
-        allRunners = allRunners.filter(r => r.id !== runnerToDelete);
+        allPhones = allPhones.filter(r => r.id !== phoneToDelete);
 
-        fs.writeFile(fileName, JSON.stringify(allRunners), (e) => {
+        fs.writeFile(fileName, JSON.stringify(allPhones), (e) => {
             if (e) {
                 callback(e);
             } else {
