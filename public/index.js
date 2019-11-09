@@ -12,7 +12,7 @@ document.getElementById("add").addEventListener("click", function(e) {
   };
   fetch(phoneEndpoint, {
     method: "POST",
-    headers: { "Content-Type":  "application/json" }, // this line is important, if this content-type is not set it wont work
+    headers: { "Content-Type": "application/json" }, // this line is important, if this content-type is not set it wont work
     body: JSON.stringify(phone)
   })
     .then(responseData => {
@@ -62,9 +62,9 @@ const getMoreInfo = id => {
     .catch(err => console.log(err));
 };
 // display data recieved from getMoreInfo
-const displayMoreInfo = (phoneData) => {
+const displayMoreInfo = phoneData => {
   // document.getElementById(phoneData.id).after(phoneData.additionalFeatures);
-  console.log("add more")
+  console.log("add more");
 };
 
 const delButtonList = document.getElementsByClassName("delButton");
@@ -75,10 +75,10 @@ delButtonArray.forEach(button => {
   });
 });
 
-const delButtonHandler = (id) => {
-  fetch(`${phoneEndpoint}/${id}`, {
-    method: 'DELETE'
+const delButtonHandler = id => {
+  fetch(`phone/${id}`, {
+    method: "DELETE"
   })
-  .then(response => console.log(response))
-  .catch(err => console.log(err));
-}
+    .then(response => console.log(response))
+    .catch(err => console.log(err));
+};
