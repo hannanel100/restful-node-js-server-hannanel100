@@ -76,7 +76,9 @@ delButtonArray.forEach(button => {
 });
 
 const delButtonHandler = (id) => {
-  fetch(`phoneEndpoint/${id}`, {
+  fetch(`${phoneEndpoint}/${id}`, {
     method: 'DELETE'
   })
+  .then(response => console.log(response))
+  .catch(err => console.log(err));
 }
