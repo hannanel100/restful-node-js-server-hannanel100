@@ -74,6 +74,6 @@ delButtonArray.forEach(button => {
   });
 });
 
-const delButtonArray = (id) => {
+const delButtonHandler = (id) => {
   console.log("delete" + id);
 }
