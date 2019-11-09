@@ -12,7 +12,7 @@ document.getElementById("add").addEventListener("click", function(e) {
   };
   fetch(phoneEndpoint, {
     method: "POST",
-    headers: { "Content-Type": "application/json" }, // this line is important, if this content-type is not set it wont work
+    headers: { "Content-Type":  "application/json" }, // this line is important, if this content-type is not set it wont work
     body: JSON.stringify(phone)
   })
     .then(responseData => {
@@ -56,7 +56,7 @@ const phoneTableView = phones => {
 };
 // get one phone
 const getMoreInfo = id => {
-  fetch(`phone/${id}`)
+  fetch(`phoneEndpoint/${id}`)
     .then(response => response.json())
     .then(phoneData => displayMoreInfo(phoneData))
     .catch(err => console.log(err));
@@ -76,5 +76,7 @@ delButtonArray.forEach(button => {
 });
 
 const delButtonHandler = (id) => {
-  console.log("delete" + id);
+  fetch(`phoneEndpoint/${id}`, {
+    method: 'DELETE'
+  })
 }
