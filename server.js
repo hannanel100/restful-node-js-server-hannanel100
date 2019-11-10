@@ -35,7 +35,7 @@ app.get('/phone/:id', (req, res) => {
 });
 
 app.post('/phone', (req, res) => {
-    phoneBl.createPhone(req.body, function (e, data) {
+    phoneBl.createPhone(req.params.id, function (e, data) {
         if (e) {
             return res.status(500).send();
         } else {
