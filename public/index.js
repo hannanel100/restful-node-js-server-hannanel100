@@ -41,14 +41,17 @@ const phoneTableView = phones => {
             <td>${phones[i].carrier}</td>
             <td><img src=${phones[i].imageUrl} alt=${phones[i].imageUrl}></td>
             <td>${phones[i].id}</td>
+            <td><button class="moreInfo">More Info</button></td>
             <td><button>Edit</button></td>
             <td><button class="delButton">Delete</button></td>
         </tr>`;
   }
-  document.getElementById("phones").innerHTML = html;
+  document.getElementsByClassName("phones").innerHTML = html;
   const phoneList = document.getElementsByClassName("phone");
   const phonesArray = [...phoneList];
-  phonesArray.forEach(phone =>
+  const moreInfoList = document.getElementsByClassName("moreInfo");
+  const moreInfoArray = [...moreInfoList];
+  moreInfoArray.forEach(phone =>
     phone.addEventListener("click", function(e) {
       getMoreInfo(e.target.parentNode.id);
     })
