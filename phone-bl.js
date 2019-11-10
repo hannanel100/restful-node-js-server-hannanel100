@@ -1,4 +1,5 @@
-const dal = require('./dal');
+const dalFunc = require('./dal');
+const dal = dalFunc('phone/phones.json');
 
 function getPhone(id, callback) {
     
@@ -37,7 +38,7 @@ function createPhone(addedPhone, callback) {
     }
 }
 
-function updatePhone(phoneToUpdate) {
+function updatePhone(phoneToUpdate, callback) {
     dal.updateOne(phoneToUpdate, (e) => {
         if (e) {
             callback(e);

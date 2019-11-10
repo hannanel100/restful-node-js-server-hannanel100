@@ -1,5 +1,6 @@
 const fs = require('fs');
-const fileName = `./phones/phones.json`;
+let fileName = '';
+
 
 function readOne(id, callback) {
     fs.readFile(`./phones/${id}.json`, (e, d) => {
@@ -15,8 +16,6 @@ function readOne(id, callback) {
     })
 
 }
-
-
 function readAll(callback) {
     fs.readFile(fileName, (e, d) => {
         const allPhones = d && d.length > 0 ? JSON.parse(d.toString()) : [];
@@ -30,12 +29,11 @@ function readAll(callback) {
         }
     })
 }
-
-function saveOne(addedRunner, callback) {
+function saveOne(addedPhone, callback) {
     fs.readFile(fileName, (e, d) => {
-        const runnersArray = d && d.length > 0 ? JSON.parse(d.toString()) : [];
-        runnersArray.push(addedRunner);
-        fs.writeFile(fileName, JSON.stringify(runnersArray), (e) => {
+        const allPhones = d && d.length > 0 ? JSON.parse(d.toString()) : [];
+        allPhones.push(addedPhone);
+        fs.writeFile(fileName, JSON.stringify(allPhones), (e) => {
             if (e) {
                 callback('error');
             }
@@ -45,7 +43,6 @@ function saveOne(addedRunner, callback) {
         });
     });
 }
-
 function updateOne(phoneToUpdate, callback) {
     fs.readFile(fileName, (e, d) => {
         let allPhones = d && d.length > 0 ? JSON.parse(d.toString()) : [];
@@ -68,7 +65,6 @@ function updateOne(phoneToUpdate, callback) {
         });
     })
 }
-
 function deleteOne(phoneToDelete, callback) {
     fs.readFile(fileName, (e, d) => {
         let allPhones = d && d.length > 0 ? JSON.parse(d.toString()) : [];
@@ -84,10 +80,16 @@ function deleteOne(phoneToDelete, callback) {
         })
     });
 }
+const dalModule = (fileNameSpecific) => {
+    fileName = fileNameSpecific;
+    return {
+        readAll: readAll,
+        readOne: readOne,
+        saveOne: saveOne,
+        deleteOne: deleteOne,
+        updateOne: updateOne
+    }
+}
+module.exports = dalModule;
 
-module.exports.readOne = readOne;
-module.exports.readAll = readAll;
-module.exports.saveOne = saveOne;
-module.exports.deleteOne = deleteOne;
-module.exports.updateOne = updateOne;
 
