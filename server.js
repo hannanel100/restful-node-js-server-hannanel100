@@ -43,15 +43,15 @@ app.post('/phone', (req, res) => {
         }
     })
 });
-// app.put('/runner/:id', (req, res) => {
-//     // runnerBl.updateRunner(req.body, function (e, data) {
-//     //     if (e) {
-//     //         return res.status(500).send();
-//     //     } else {
-//     //         return res.status(200).send();
-//     //     }
-//     // })
-// });
+app.put('/phone/:id', (req, res) => {
+    phoneBl.updatePhone(req.body, function (e, data) {
+        if (e) {
+            return res.status(500).send();
+        } else {
+            return res.status(200).send();
+        }
+    })
+});
 app.delete('/phone/:id', (req, res) => {
     phoneBl.deletePhone(req.params.id, function (e, data) {
         if (e) {

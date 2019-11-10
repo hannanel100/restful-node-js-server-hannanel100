@@ -37,8 +37,14 @@ function createPhone(addedPhone, callback) {
     }
 }
 
-function updatePhone(phone) {
-
+function updatePhone(phoneToUpdate) {
+    dal.updateOne(phoneToUpdate, (e) => {
+        if (e) {
+            callback(e);
+        } else {
+            callback(null);
+        }
+    })
 }
 
 function deletePhone(phoneToDelete, callback) {
@@ -70,11 +76,10 @@ function filterPhoneList(selectedFiltersValues, callback) {
         }
     })
 }
-module.exports.updateRunner = function () {
 
-}
 module.exports.getPhone = getPhone;
 module.exports.getPhones = getPhones;
 module.exports.createPhone = createPhone;
 module.exports.filterPhoneList = filterPhoneList;
 module.exports.deletePhone = deletePhone;
+module.exports.updatePhone = updatePhone;

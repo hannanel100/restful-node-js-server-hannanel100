@@ -79,6 +79,6 @@ const delButtonHandler = id => {
   fetch(`phone/${id}`, {
     method: "DELETE"
   })
-    .then(response => console.log(response))
+    .then(response => console.log(response.status))
     .catch(err => console.log(err));
 };

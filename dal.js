@@ -2,18 +2,18 @@ const fs = require('fs');
 const fileName = `./phones/phones.json`;
 
 function readOne(id, callback) {
-    fs.readFile(`./phones/${id}.json`, (e, d) =>{
+    fs.readFile(`./phones/${id}.json`, (e, d) => {
         console.log(d);
         const phone = d && d.length > 0 ? JSON.parse(d.toString()) : [];
         console.log(phone);
-        if (e){
+        if (e) {
             callback(e);
         }
-        else{
+        else {
             callback(null, phone);
         }
     })
-    
+
 }
 
 
@@ -42,13 +42,31 @@ function saveOne(addedRunner, callback) {
             else {
                 callback(null);
             }
-
         });
     });
 }
 
-function updateOne(runnerToUpdate, callback) {
-
+function updateOne(phoneToUpdate, callback) {
+    fs.readFile(fileName, (e, d) => {
+        let allPhones = d && d.length > 0 ? JSON.parse(d.toString()) : [];
+        allPhones.map((phone) => {
+            if (phone.id.toString() == phoneToUpdate.id.toString()) {
+                phone.carrier = phoneToUpdate.carrier;
+                phone.id = phoneToUpdate.id;
+                phone.imageUrl = phoneToUpdate.imageUrl;
+                phone.name = phoneToUpdate.name;
+                phone.snippet = phoneToUpdate.snippet;
+            }
+        })
+        fs.writeFile(fileName, JSON.stringify(allPhones), (e) => {
+            if (e) {
+                callback('error');
+            }
+            else {
+                callback(null);
+            }
+        });
+    })
 }
 
 function deleteOne(phoneToDelete, callback) {
@@ -71,4 +89,5 @@ module.exports.readOne = readOne;
 module.exports.readAll = readAll;
 module.exports.saveOne = saveOne;
 module.exports.deleteOne = deleteOne;
+module.exports.updateOne = updateOne;
 
