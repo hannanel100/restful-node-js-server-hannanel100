@@ -56,10 +56,10 @@ const phoneTableView = phones => {
 };
 // get one phone
 const getMoreInfo = id => {
-  fetch('phone/${id}`)
+  fetch(`phone/${id}`)
     .then(response => response.json())
     .then(phoneData => displayMoreInfo(phoneData))
-    .catch(err => console.log(err));
+    .catch(err => console.log(err))
 };
 // display data recieved from getMoreInfo
 const displayMoreInfo = phoneData => {
@@ -76,8 +76,7 @@ delButtonArray.forEach(button => {
 });
 
 const delButtonHandler = id => {
-  fetch(`
-  /${id}`, {
+  fetch(`phone/${id}`, {
     method: "DELETE"
   })
     .then(response => console.log(response))
