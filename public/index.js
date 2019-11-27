@@ -1,4 +1,4 @@
-const phoneEndpoint = "/phone";
+const phoneEndpoint = "http://localhost:3201/phone";
 // add phone - post not working
 document.getElementById("add").addEventListener("click", function(e) {
   e.preventDefault();
@@ -55,14 +55,15 @@ const phoneTableView = phones => {
   );
 };
 // get one phone
-const getMoreInfo = id => {
-  fetch(`phone/${id}`)
+const getMoreInfo = (id) => {
+  fetch(`http://localhost:3201/phone/${id}`)
     .then(response => response.json())
     .then(phoneData => displayMoreInfo(phoneData))
     .catch(err => console.log(err))
 };
 // display data recieved from getMoreInfo
 const displayMoreInfo = phoneData => {
+  // document.getElementById(phoneData.id).after().innerHTML = '';
   // document.getElementById(phoneData.id).after(phoneData.additionalFeatures);
   console.log("add more");
 };
@@ -76,7 +77,7 @@ delButtonArray.forEach(button => {
 });
 
 const delButtonHandler = id => {
-  fetch(`phone/${id}`, {
+  fetch(`http://localhost:3201/phone/${id}`, {
     method: "DELETE"
   })
     .then(response => console.log(response.status))

@@ -6,6 +6,9 @@ const app = express();
 const PORT = 3201;
 const phoneBl = require('./phone-bl');
 const tokenBl = require('./token-bl');
+const cors = require('cors');
+app.use(cors());
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 
@@ -26,7 +29,7 @@ app.get('/phone/:id', (req, res) => {
             console.log(e)
             return res.status(500).send();
         } else {
-            console.log(data);
+            // console.log(data);
             return res.send(data);
         }
     })
@@ -55,7 +58,8 @@ app.delete('/phone/:id', (req, res) => {
         if (e) {
             return res.status(500).send();
         } else {
-            return res.send(data);
+            console.log(data);
+            return res.send('success!');
         }
     })
 });

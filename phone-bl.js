@@ -1,6 +1,6 @@
 const dalFunc = require('./dal');
-const dal = dalFunc('phone/phones.json');
-
+const dal = dalFunc('phones/phones.json');
+const TABLE_NAME = 'phones';
 function getPhone(id, callback) {
     
     
@@ -15,10 +15,12 @@ function getPhone(id, callback) {
 }
 
 function getPhones(callback) {
-    dal.readAll((e, allPhones) => {
+    const query = `SELECT * FROM ${TABLE_NAME}`;
+    dal.readAll(query, (e, allPhones) => {
         if (e) {
             callback(e);
         } else {
+            
             callback(null, allPhones);
         }
     })
@@ -49,11 +51,13 @@ function updatePhone(phoneToUpdate, callback) {
 }
 
 function deletePhone(phoneToDelete, callback) {
-    dal.deleteOne(phoneToDelete, (e) => {
+    const query = `DELETE FROM ${TABLE_NAME} WHERE id LIKE '${phoneToDelete}'`;
+    console.log(query);
+    dal.deleteOne(query, (e, results) => {
         if (e) {
             callback(e);
         } else {
-            callback(null);
+            callback(null, results);
         }
     })
 }

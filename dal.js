@@ -1,5 +1,13 @@
 const fs = require('fs');
 let fileName = '';
+const mysql = require('mysql');
+const _connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+
+    database: 'phones'
+});
 
 
 function readOne(id, callback) {
@@ -16,19 +24,24 @@ function readOne(id, callback) {
     })
 
 }
-function readAll(callback) {
-    fs.readFile(fileName, (e, d) => {
-        const allPhones = d && d.length > 0 ? JSON.parse(d.toString()) : [];
-        allPhones.sort(function (a, b) {
-            return a.id - b.id;
-        });
-        if (e) {
-            callback(e);
-        } else {
-            callback(null, allPhones);
-        }
-    })
-}
+function readAll(query, callback) {
+   
+            _connection.query(query, function (error, results, fields) {
+
+                if (error) {
+                    console.log('query error')
+                    callback("query error" + error)
+                }
+                else {
+
+                    callback(null, results);
+                }
+            });
+
+    }
+    
+
+
 function saveOne(addedPhone, callback) {
     fs.readFile(fileName, (e, d) => {
         const allPhones = d && d.length > 0 ? JSON.parse(d.toString()) : [];
@@ -65,23 +78,19 @@ function updateOne(phoneToUpdate, callback) {
         });
     })
 }
-function deleteOne(phoneToDelete, callback) {
-    fs.readFile(fileName, (e, d) => {
-        let allPhones = d && d.length > 0 ? JSON.parse(d.toString()) : [];
-
-        allPhones = allPhones.filter(r => r.id !== phoneToDelete);
-
-        fs.writeFile(fileName, JSON.stringify(allPhones), (e) => {
-            if (e) {
-                callback(e);
+function deleteOne(query, callback) {
+    _connection.query(query, function (error, results, fields) {
+        
+            if (error) {
+                callback(error);
             } else {
-                callback(null);
+                callback(null, results);
             }
-        })
+        
     });
 }
-const dalModule = (fileNameSpecific) => {
-    fileName = fileNameSpecific;
+const dalModule = () => {
+
     return {
         readAll: readAll,
         readOne: readOne,
